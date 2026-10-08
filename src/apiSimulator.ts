@@ -1,6 +1,10 @@
 // Lab 2
 // Promises and Error Handling Challenge
 
+// Updating apiSimulator.ts -Part 4.2
+import {NetworkError, DataError} from "./errors.js";
+
+
 // fetchProductCatalog(): Simulates fetching a list of products, each with id, name, and price.
 
 export interface Product {
@@ -11,7 +15,7 @@ export interface Product {
 }
 
 export interface Review {
-    productId: string;
+    productId: number;
     reviewer: string;
     rating: number;
     comment: string;
@@ -33,7 +37,9 @@ export const fetchProductCatalog = (): Promise<Product[]> => {
                     { id: 2, name: "Headphones", price: 200 },
                 ]);
             } else {
-                reject("Failed to fetch product catalog");
+                // reject("Failed to fetch product catalog");
+                reject(
+                    new NetworkError("Failed to fetch product catalog"));
             }
         }, 1000);
     });
@@ -74,7 +80,9 @@ export const fetchProductReviews = (productId: number): Promise<Review[]> => {
                     },
                 ]);
             } else {
-                reject("Failed to fetch reviews for product ID ${productId}");
+                // reject("Failed to fetch reviews for product ID ${productId}");
+                reject(
+                    new NetworkError(`Failed to fetch reviews for product ID ${productId}`));
             }
         }, 1500);
     });
@@ -99,7 +107,10 @@ export const fetchSalesReport = (): Promise<SalesReport> => {
 
                 );
             } else {
-                reject("Failed to fetch sales report");
+                // reject("Failed to fetch sales report");
+                reject(
+                    new NetworkError("Failed to fetch the sales Report")
+                );
             }
         }, 1000);
     });
