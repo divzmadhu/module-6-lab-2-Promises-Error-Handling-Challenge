@@ -24,6 +24,7 @@ Critical Thinking Questions
 
 
 
-    
+   **Review
+    Completed the Promise and Error Handling project by building a Promise chain to fetch the product catalog, reviews, and sales report. I also learned how to use .then(), .catch(), .finally(), and custom error classes. I understood how errors are handled when an API call fails. I still need to work on the critical thinking questions, which I will complete later. 
     
     
