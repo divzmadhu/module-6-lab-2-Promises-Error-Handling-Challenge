@@ -12,7 +12,7 @@
 // Create a retryPromise() function that calls an API, such as fetchProductCatalog().
 import { fetchProductCatalog } from "./apiSimulator.js";
 export const retryPromise = () => {
-    return fetchProductCatalog();
+    return fetchProductCatalog()
     .catch (() => {
     console.log("First attempt failed. Trying again...");
     return fetchProductCatalog();

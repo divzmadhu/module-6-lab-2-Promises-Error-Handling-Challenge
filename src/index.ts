@@ -1,8 +1,13 @@
 
+// Part 5:
+import { retryPromise } from "./retry.js";
+
 // Part 3: Build the Main Application Logic
+
 
 //Improving  .catch () using custom errors
 import { NetworkError, DataError } from "./errors.js";
+
 
 import {
     fetchProductCatalog,
@@ -148,3 +153,31 @@ Sales Report: { totalSales: 15000, unitsSold: 25, averagePrice: 600 }
 All API calls have been attempted.
 */
 
+
+//Implementing Part 5
+retryPromise()
+    .then((products) => {
+        console.log("Products fetched successfully:", products);
+    })
+    .catch((error) => {
+        console.error("Failed even after retry:", error.message);
+    });
+
+
+// =============================================================================
+// Testing Output: Promise Chain with Retry Mechanism
+// Added retryPromise() to retry fetching products if the first attemt fails
+// Products were fetched successfully, but fetching reviews failed with a NetworkError.
+// =============================================================================
+/*
+npx tsx src/index.ts
+Products: [
+  { id: 1, name: 'Laptop', price: 1200 },
+  { id: 2, name: 'Headphones', price: 200 }
+]
+Products fetched successfully: [
+  { id: 1, name: 'Laptop', price: 1200 },
+  { id: 2, name: 'Headphones', price: 200 }
+]
+Network problem: Failed to fetch reviews for product ID 1
+All API calls have been attempted.*/
