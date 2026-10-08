@@ -20,3 +20,4 @@ export class DataError extends Error{
 }
 
 // Update API Simulation Functions to use these custom error classes when rejecting Promises.
+// Refer apiSimulator.ts file for this updation

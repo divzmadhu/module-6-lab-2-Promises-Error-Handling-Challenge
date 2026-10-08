@@ -17,5 +17,13 @@ Critical Thinking Questions
     This makes it easier to understand what went wrong instead of having only a general error message.
 
     3. When might a retry mechanism be more effective than an immediate failure response?
+    In my program, the API calls have a chance of failing because of a network problem. If fetchProductReviews() fails temporarily, I could try calling it again instead of immediately stopping the Promise chain.
 
-    Retry is still in progress. Will be updating soon
+    For example, if the reviews request fails once but the network works the second time, retrying would allow the program to get the reviews successfully.
+
+
+
+
+    
+    
+    

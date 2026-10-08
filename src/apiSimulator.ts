@@ -1,11 +1,40 @@
 // Lab 2
 // Promises and Error Handling Challenge
 
+/**
+ * ============================================================================
+ * Module 6    : TypeScript and Advanced JavaScript
+ * Lab 2       : Promises and Error Handling Challenge
+ * Date        : October 2026
+ * Description : Asynchronous operations and error handling in TypeScript.
+ * ============================================================================
+
+===============================================================================
+LAB OBJECTIVES
+===============================================================================
+
+By the end of this lab, you will be able to:
+
+1. Apply Promises to manage multiple asynchronous operations in JavaScript.
+2. Implement chained Promises to handle sequential data retrieval and manage 
+   dependencies between API calls.
+3. Utilize .catch() and .finally() to handle errors and perform cleanup tasks 
+   in a Promise chain.
+4. Design custom error classes to improve error identification and debugging.
+5. Implement a retry mechanism to manage failed asynchronous requests, 
+   enhancing application resilience.
+6. Analyze the benefits and challenges of using error handling strategies in 
+   complex asynchronous workflows.
+
+===============================================================================
+*/
+
+
 // Updating apiSimulator.ts -Part 4.2
 import {NetworkError, DataError} from "./errors.js";
 
 
-// fetchProductCatalog(): Simulates fetching a list of products, each with id, name, and price.
+
 
 export interface Product {
     id: number;
@@ -27,6 +56,10 @@ export interface SalesReport {
     unitsSold: number;
     averagePrice: number;
 }
+
+// Part 2a fetchProductCatalog(): Simulates fetching a list of products, each with id, name, and price.
+// Use Math.random() to sometimes reject the Promise with an error message, e.g., "Failed to fetch product catalog"
+
 //{ id: number; name: string; price: number }
 export const fetchProductCatalog = (): Promise<Product[]> => {
     return new Promise((resolve, reject) => {
@@ -46,7 +79,7 @@ export const fetchProductCatalog = (): Promise<Product[]> => {
 };
 
 
-// fetchProductReviews(productId: number): Simulates fetching reviews for a product.
+// Part 2b fetchProductReviews(productId: number): Simulates fetching reviews for a product.
 
 //     Resolve the Promise with an array of reviews after a 1.5-second delay.
 //     Reject the Promise randomly with an error message, e.g., "Failed to fetch reviews for product ID ${productId}".
@@ -89,7 +122,7 @@ export const fetchProductReviews = (productId: number): Promise<Review[]> => {
 };
 
 
-// fetchSalesReport(): Simulates fetching a sales report with totalSales, unitsSold, and averagePrice.
+// Part 2c fetchSalesReport(): Simulates fetching a sales report with totalSales, unitsSold, and averagePrice.
 
 //     Resolve the Promise with a mock sales report after a 1-second delay.
 //     Reject randomly with an error message, e.g., "Failed to fetch sales report".
@@ -115,6 +148,3 @@ export const fetchSalesReport = (): Promise<SalesReport> => {
         }, 1000);
     });
 };
-
-
-

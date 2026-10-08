@@ -1,3 +1,6 @@
+
+// Part 3: Build the Main Application Logic
+
 //Improving  .catch () using custom errors
 import { NetworkError, DataError } from "./errors.js";
 
@@ -43,77 +46,105 @@ fetchProductCatalog()
     });
 
 
-//Initial testing Output
+/*******************************************************************************
+ *                             TEST RUN RESULTS                                *
+ *******************************************************************************/
 
-//     $ npx tsx src/index.ts
-// Products: [
-//   { id: 1, name: 'Laptop', price: 1200 },
-//   { id: 2, name: 'Headphones', price: 200 }
-// ]
-
-// Second testing Output after building the actual Promise chain
-// Products: [
-//   { id: 1, name: 'Laptop', price: 1200 },
-//   { id: 2, name: 'Headphones', price: 200 }
-// ]
-// Reviews: [
-//   {
-//     productId: 1,
-//     reviewer: 'Customer1',
-//     rating: 5,
-//     comment: 'The Product is good '
-//   },
-//   {
-//     productId: 1,
-//     reviewer: 'Customer2',
-//     rating: 3,
-//     comment: 'The Product is not so good '
-//   },
-//   {
-//     productId: 1,
-//     reviewer: 'Customer3',
-//     rating: 1,
-//     comment: 'Poor Quality '
-//   }
-// ]
-// Sales Report: { totalSales: 15000, unitsSold: 25, averagePrice: 600 }
-// All API calls have been attempted.
-
-// Third testing Output after adding NetworkError and DataError and updated error handling.
-
-// Attempt 1
-
-//  { id: 2, name: 'Headphones', price: 200 }
-// ]
-// Network problem: Failed to fetch reviews for product ID 1
-// All API calls have been attempted.
+// =============================================================================
+// STAGE 1: INITIAL BASELINE TEST
+// Command: $ npx tsx src/index.ts
+// =============================================================================
+/*
+Products: [
+  { id: 1, name: 'Laptop', price: 1200 },
+  { id: 2, name: 'Headphones', price: 200 }
+]
+*/
 
 
-// Attempt 3
+// =============================================================================
+// STAGE 2: SEQUENTIAL PROMISE CHAIN
+// Full flow: Fetch Products -> Fetch Reviews -> Fetch Sales Report
+// =============================================================================
+/*
+Products: [
+  { id: 1, name: 'Laptop', price: 1200 },
+  { id: 2, name: 'Headphones', price: 200 }
+]
+Reviews: [
+  {
+    productId: 1,
+    reviewer: 'Customer1',
+    rating: 5,
+    comment: 'The Product is good '
+  },
+  {
+    productId: 1,
+    reviewer: 'Customer2',
+    rating: 3,
+    comment: 'The Product is not so good '
+  },
+  {
+    productId: 1,
+    reviewer: 'Customer3',
+    rating: 1,
+    comment: 'Poor Quality '
+  }
+]
+Sales Report: { totalSales: 15000, unitsSold: 25, averagePrice: 600 }
+All API calls have been attempted.
+*/
 
-// Products: [
-//   { id: 1, name: 'Laptop', price: 1200 },
-//   { id: 2, name: 'Headphones', price: 200 }
-// ]
-// Reviews: [
-//   {
-//     productId: 1,
-//     reviewer: 'Customer1',
-//     rating: 5,
-//     comment: 'The Product is good '
-//   },
-//   {
-//     productId: 1,
-//     reviewer: 'Customer2',
-//     rating: 3,
-//     comment: 'The Product is not so good '
-//   },
-//   {
-//     productId: 1,
-//     reviewer: 'Customer3',
-//     rating: 1,
-//     comment: 'Poor Quality '
-//   }
-// ]
-// Sales Report: { totalSales: 15000, unitsSold: 25, averagePrice: 600 }
-// All API calls have been attempted.
+
+// =============================================================================
+// STAGE 3:  ERROR HANDLING (CUSTOM ERRORS + RETRY LOGIC)
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// [RUN 1] Intermittent Network Failure (Caught & Handled)
+// -----------------------------------------------------------------------------
+/*
+Attempt 1
+
+Products: [
+  { id: 1, name: 'Laptop', price: 1200 },
+  { id: 2, name: 'Headphones', price: 200 }
+]
+Network problem: Failed to fetch reviews for product ID 1
+All API calls have been attempted.
+*/
+
+// -----------------------------------------------------------------------------
+// [RUN 3] Successful Retry Execution
+// -----------------------------------------------------------------------------
+/*
+Attempt 3
+
+Products: [
+  { id: 1, name: 'Laptop', price: 1200 },
+  { id: 2, name: 'Headphones', price: 200 }
+]
+Reviews: [
+  {
+    productId: 1,
+    reviewer: 'Customer1',
+    rating: 5,
+    comment: 'The Product is good '
+  },
+  {
+    productId: 1,
+    reviewer: 'Customer2',
+    rating: 3,
+    comment: 'The Product is not so good '
+  },
+  {
+    productId: 1,
+    reviewer: 'Customer3',
+    rating: 1,
+    comment: 'Poor Quality '
+  }
+]
+Sales Report: { totalSales: 15000, unitsSold: 25, averagePrice: 600 }
+All API calls have been attempted.
+*/
+
