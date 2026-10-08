@@ -1,16 +1,28 @@
 import {
     fetchProductCatalog,
     fetchProductReviews,
-    fetchSalesReport
+    fetchSalesReport,
 } from "./apiSimulator.js";
 
 fetchProductCatalog()
     .then((products) => {
         console.log("Products:", products);
+        return fetchProductReviews(products[0].id);
+    })
+    .then((reviews) => {
+        console.log("Reviews:", reviews);
+        return fetchSalesReport();
+    })
+    .then((SalesReport) => {
+        console.log("Sales Report:", SalesReport);
     })
     .catch((error) => {
-        console.error("Error:", error);
-    });
+    console.log("Something went wrong, Couldnt fetch the data requested", error);
+})
+.finally(() => {
+    console.log("All API calls have been attempted.");
+
+});
 
 
 //Initial testing Output
